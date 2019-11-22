@@ -11,7 +11,7 @@ class PM:
         m=len(p)
 
         i=0
-        for i in range(0, n-m):
+        for i in range(0, n-m+1):
             j = 0
             while(j<m and t[i+j]==p[j]):
                 j=j+1
@@ -98,18 +98,37 @@ class PM:
 
 
 if __name__=='__main__':
-    text = 'jim saw me in a barbershop'
-    pattern = 'barber'
-    pm=PM(text, pattern)
+    experiment_list = \
+    [
+        ('barber', 'jim saw me in a barbershop'),
+        ('fox', 'the quick fox jumps over the lazy dog'),
+        ('abcdabd', 'abc abcdab abcdabcdabde'),
+        ('needle', 'findinahaystackneedleina'),
+        ('baobab', 'bird loved bananas'),
+        ('baobab', 'bess knew about baobabs'),
+        ('country', 'i am in a new country'),
+        ('student', 'this is algorithm class'),
+        ('present', 'this pattern is present here'),
+        ('absent', 'this pattern is not present here')
+    ]
 
-    # brute force
-    i=pm.brute_force()
-    print('Brute-force (matched at) index: %s.'%(i))
-
-    # bm horspool
-    i = pm.bm_horspool()
-    print('BM Horspool (matched at) index: %s.'%(i))
-
-    # kmp
-    i=pm.kmp()
-    print('KMP (matched at) index: %s.'%(i))
+    for i in range(len(experiment_list)):
+        print('#######################################################################################################')
+        e=experiment_list[i]
+        pattern = e[0]
+        text = e[1]
+        print('EXPERIMENT NO ===> %s'%(str(i+1)))
+        print('PATTERN ===> %s'%(pattern))
+        print('TEXT ===> %s'%(text))
+        # pattern matcher
+        pm=PM(text, pattern)
+        # brute force
+        i=pm.brute_force()
+        print('Brute-force (matched at) index: %s.'%(i))
+        # bm horspool
+        i = pm.bm_horspool()
+        print('BM Horspool (matched at) index: %s.'%(i))
+        # kmp
+        i=pm.kmp()
+        print('KMP (matched at) index: %s.'%(i))
+        print('#######################################################################################################')
