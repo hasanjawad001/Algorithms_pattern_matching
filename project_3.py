@@ -98,8 +98,8 @@ class PM:
 
 
 if __name__=='__main__':
-    text = 'abc abcdab abcdabcdabde'
-    pattern = 'dab'
+    text = 'jim saw me in a barbershop'
+    pattern = 'barber'
     pm=PM(text, pattern)
 
     # brute force
