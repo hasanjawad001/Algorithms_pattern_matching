@@ -63,25 +63,43 @@ class PM:
                     j=f[j-1]
         return -1
 
+    def shift_table(self,p):
+        m=len(p)
+        st = {
+            'def': m
+        }
+        for i in range(m-1):
+            st[p[i]] = m-i-1
+        return st
+
+    def shift_value(self, st, c):
+        if c in st.keys():
+            return st[c]
+        else:
+            return st['def']
+
     def bm_horspool(self):
         t = self.t
         p = self.p
         n = len(t)
         m = len(p)
 
-        i = 0
-        for i in range(0, n - m):
-            j = 0
-            while (j < m and t[i + j] == p[j]):
-                j = j + 1
-                if j == m:
-                    return i
+        st = self.shift_table(p)
+        i=m-1
+        while(i<=n-1):
+            k=0
+            while(k<=m-1 and p[m-1-k]==t[i-k]):
+                k=k+1
+            if (k==m):
+                return i-m+1
+            else:
+                i = i + self.shift_value(st,t[i])
         return -1
 
 
 if __name__=='__main__':
     text = 'abc abcdab abcdabcdabde'
-    pattern = 'abcdabd'
+    pattern = 'dab'
     pm=PM(text, pattern)
 
     # brute force
