@@ -13,13 +13,13 @@ class PM:
         nc=0
         i=0
         for i in range(0, n-m+1):
-            nc+=1
             j = 0
             while(j<m and t[i+j]==p[j]):
                 nc+=1
                 j=j+1
                 if j==m:
                     return i, nc
+            nc+=1
         return -1, nc
 
     def failure_function(self,p):
@@ -54,14 +54,15 @@ class PM:
         i=0
         j=0
         while(i<n):
-            nc+=1
             if t[i]==p[j]:
+                nc += 1
                 if j==m-1:
                     return i-j, nc
                 else:
                     i+=1
                     j+=1
             else:
+                nc += 1
                 if j==0:
                     i+=1
                 else:
@@ -93,7 +94,6 @@ class PM:
         st = self.shift_table(p)
         i=m-1
         while(i<=n-1):
-            nc+=1
             k=0
             while(k<=m-1 and p[m-1-k]==t[i-k]):
                 nc+=1
@@ -102,6 +102,7 @@ class PM:
                 return i-m+1, nc
             else:
                 i = i + self.shift_value(st,t[i])
+            nc+=1
         return -1, nc
 
 
